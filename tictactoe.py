@@ -33,5 +33,5 @@ print("You select", token)
 print_board(state)
 while True:
   row, col = enter_move()
-  state[row][col] = token
+  state[row-1][col-1] = token
   print_board(state)
