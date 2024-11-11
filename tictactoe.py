@@ -15,3 +15,10 @@ token = input("Select x or o: ")
 print("You select", token)
 
 print_board(state)
+
+while True:
+  move = input("Enter a move:")
+  row = int(move[0])
+  col = int(move[1])
+  state[row][col] = token
+  print_board(state)
