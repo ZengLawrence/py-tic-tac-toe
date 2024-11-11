@@ -17,7 +17,10 @@ def enter_move():
   move = input("Enter a move:")
   if (len(move) == 2):
     try:
-      return (int(move[0]), int(move[1]))
+      row = int(move[0])
+      col = int(move[1])
+      if ((row > 0 and row < 3) and (col > 0 and col < 3)):
+        return (row, col)
     except ValueError:
       pass
   print(help)
