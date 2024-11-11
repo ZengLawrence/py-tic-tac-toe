@@ -19,11 +19,9 @@ def enter_move():
     try:
       return (int(move[0]), int(move[1]))
     except ValueError:
-      print(help)
-      return enter_move()
-  else:
-    print(help)
-    return enter_move()
+      pass
+  print(help)
+  return enter_move()
 
 def select_token():
   token = input("Select x or o: ")
