@@ -18,7 +18,11 @@ def enter_move():
 
 def select_token():
   token = input("Select x or o: ")
-  return token
+  if (token not in 'xo'):
+    print("Must select x or o.")
+    return select_token()
+  else:
+    return token
 
 token = select_token()
 print("You select", token)
