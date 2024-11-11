@@ -11,14 +11,17 @@ def print_board(state):
   for l in b:
     print(l)
 
+def enter_move():
+  # get user entered move and return (row, col)
+  move = input("Enter a move:")
+  return (int(move[0]), int(move[1]))
+
 token = input("Select x or o: ")
 print("You select", token)
 
 print_board(state)
 
 while True:
-  move = input("Enter a move:")
-  row = int(move[0])
-  col = int(move[1])
+  row, col = enter_move()
   state[row][col] = token
   print_board(state)
