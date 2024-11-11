@@ -16,11 +16,14 @@ def enter_move():
   move = input("Enter a move:")
   return (int(move[0]), int(move[1]))
 
-token = input("Select x or o: ")
+def select_token():
+  token = input("Select x or o: ")
+  return token
+
+token = select_token()
 print("You select", token)
 
 print_board(state)
-
 while True:
   row, col = enter_move()
   state[row][col] = token
