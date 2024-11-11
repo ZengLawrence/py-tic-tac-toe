@@ -26,7 +26,6 @@ def select_token():
 
 token = select_token()
 print("You select", token)
-
 print_board(state)
 while True:
   row, col = enter_move()
