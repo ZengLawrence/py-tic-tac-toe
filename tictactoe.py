@@ -13,11 +13,16 @@ def print_board(state):
 
 def enter_move():
   # get user entered move and return (row, col)
+  help = "Enter 2 digits for the move, for example, 11 for row 1 and column 1."
   move = input("Enter a move:")
   if (len(move) == 2):
-    return (int(move[0]), int(move[1]))
+    try:
+      return (int(move[0]), int(move[1]))
+    except ValueError:
+      print(help)
+      return enter_move()
   else:
-    print("Enter 2 digits for the move, for example, 11 for row 1 and column 1.")
+    print(help)
     return enter_move()
 
 def select_token():
