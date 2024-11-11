@@ -13,15 +13,31 @@ def print_board(state):
 
 def enter_move():
   # get user entered move and return (row, col)
+  help = "Enter 2 digits for the move, for example, 11 for row 1 and column 1."
   move = input("Enter a move:")
-  return (int(move[0]), int(move[1]))
+  if (len(move) == 2):
+    try:
+      row = int(move[0])
+      col = int(move[1])
+      if ((row > 0 and row < 3) and (col > 0 and col < 3)):
+        return (row, col)
+    except ValueError:
+      pass
+  print(help)
+  return enter_move()
 
-token = input("Select x or o: ")
+def select_token():
+  token = input("Select x or o: ")
+  if (token not in 'xo'):
+    print("Must select x or o.")
+    return select_token()
+  else:
+    return token
+
+token = select_token()
 print("You select", token)
-
 print_board(state)
-
 while True:
   row, col = enter_move()
-  state[row][col] = token
+  state[row-1][col-1] = token
   print_board(state)
