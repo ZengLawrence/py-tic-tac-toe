@@ -21,7 +21,7 @@ def enter_move(side):
     try:
       row = int(move[0])
       col = int(move[1])
-      if ((row > 0 and row < 3) and (col > 0 and col < 3)):
+      if ((row > 0 and row < 4) and (col > 0 and col < 4)):
         return (row, col, side, next_moves[side])
     except ValueError:
       pass
