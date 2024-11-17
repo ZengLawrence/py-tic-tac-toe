@@ -15,8 +15,10 @@ next_moves = { 'x': 'o', 'o': 'x'}
 
 def enter_move(side):
   # get user entered move and return (row, col)
-  help = "Enter 2 digits for the move, for example, 11 for row 1 and column 1."
+  help = "Enter 2 digits for the move, for example, 11 for row 1 and column 1. 'q' to quit."
   move = input("Enter a move for " + side + ":")
+  if move == 'q':
+    exit()
   if (len(move) == 2):
     try:
       row = int(move[0])
