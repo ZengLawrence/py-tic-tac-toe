@@ -33,6 +33,9 @@ def all_three_same(row):
   return (x in 'xo') and (x == y) and (x == z)
 
 def game_over(state):
+  return winning(state)
+
+def winning(state):
   return (
     all_three_same(state[0]) or 
     all_three_same(state[1]) or 
