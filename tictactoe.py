@@ -39,3 +39,4 @@ while game.running():
     print(instruction)
   else:
     print_board(game.state)
+print(game.result)
