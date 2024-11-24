@@ -54,14 +54,19 @@ class Game:
   def __init__(self):
     self.state = init_state()
     self.side = 'x'
+    self.result = None
 
   def running(self):
-    return not game_over(self.state);
+    return self.result is None
 
   def make(self, move):
     # make a move -- tuple of (row, col) in the game, through exception if not valid
     validate(move, self.state)
     set(self.state, move, self.side)
+    if winning(self.state):
+      self.result = self.side + " won" 
+    if stalemate(self.state):
+      self.result = "stalemate"
     self.side = next_move(self.side)
 
 
