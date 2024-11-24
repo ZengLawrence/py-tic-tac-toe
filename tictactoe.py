@@ -23,7 +23,7 @@ def enter_move(side):
     try:
       row = int(move[0])
       col = int(move[1])
-      return (row, col, side, next_moves[side])
+      return ((row, col), side, next_moves[side])
     except ValueError:
       pass
   print(help)
@@ -49,9 +49,10 @@ print("You select", token)
 print_board(state)
 side = 'x'
 while True:
-  row, col, curr_side, next_side = enter_move(side)
-  is_valid, err_msg = validate((row, col))
+  move, curr_side, next_side = enter_move(side)
+  is_valid, err_msg = validate(move)
   if is_valid:
+    row, col = move
     state[row-1][col-1] = curr_side
     print_board(state)
     side = next_side
