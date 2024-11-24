@@ -27,6 +27,23 @@ def next_move(side):
     return 'o'
   else:
     return 'x'
+
+def all_three_same(row):
+  x, y, z = row
+  return (x in 'xo') and (x == y) and (x == z)
+
+def game_over(state):
+  return (
+    all_three_same(state[0]) or 
+    all_three_same(state[1]) or 
+    all_three_same(state[2]) or 
+    all_three_same([state[0][0], state[1][0], state[2][0]]) or 
+    all_three_same([state[0][1], state[1][1], state[2][1]]) or 
+    all_three_same([state[0][2], state[1][2], state[2][2]]) or 
+    all_three_same([state[0][0], state[1][1], state[2][2]]) or 
+    all_three_same([state[0][2], state[1][1], state[2][0]])
+    )
+
 class Game:
   def __init__(self):
     self.state = init_state()
@@ -40,3 +57,14 @@ class Game:
     validate(move, self.state)
     set(self.state, move, self.side)
     self.side = next_move(self.side)
+
+
+if __name__ == "__main__":
+  assert game_over([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
+  assert game_over([[' ', ' ', ' '], ['x', 'x', 'x'], [' ', ' ', ' ']]), "second row is winner"
+  assert game_over([[' ', ' ', ' '], [' ', ' ', ' '], ['x', 'x', 'x']]), "third row is winner"
+  assert game_over([['o', ' ', ' '], ['o', ' ', ' '], ['o', ' ', ' ']]), "first column is winner"
+  assert game_over([[' ', 'o', ' '], [' ', 'o', ' '], [' ', 'o', ' ']]), "second column is winner"
+  assert game_over([[' ', ' ', 'o'], [' ', ' ', 'o'], [' ', ' ', 'o']]), "third column is winner"
+  assert game_over([['x', ' ', ' '], [' ', 'x', ' '], [' ', ' ', 'x']]), "diagonal is winner"
+  assert game_over([[' ', ' ', 'o'], [' ', 'o', ' '], ['o', ' ', ' ']]), "diagonal is winner"
