@@ -1,4 +1,4 @@
-from game import Game
+from game import Game, BoxTakenViolation
 
 state = [[" ", " ", " "],
          [" ", " ", " "],
@@ -58,15 +58,18 @@ def select_token():
 
 token = select_token()
 print("You select", token)
-print_board(state)
-side = 'x'
 game = Game()
+print_board(game.state)
+side = 'x'
 while game.running():
   move, curr_side, next_side = enter_move(side)
-  is_valid, err_msg = validate(move, state)
-  if is_valid:
-    set(state, move, curr_side)
-    print_board(state)
-    side = next_side
+  try:
+    game.make(move)
+  except BoxTakenViolation:
+    print("Box %s%s is taken" % move)
+  except:
+    print(instruction)
   else:
-    print(err_msg)
+    print_board(game.state)
+    side = next_side
+    
