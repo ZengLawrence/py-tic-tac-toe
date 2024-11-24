@@ -21,7 +21,7 @@ def enter_move(side):
     try:
       row = int(move[0])
       col = int(move[1])
-      return ((row, col), side, next_moves[side])
+      return (row, col)
     except ValueError:
       pass
   print(instruction)
@@ -39,9 +39,8 @@ token = select_token()
 print("You select", token)
 game = Game()
 print_board(game.state)
-side = 'x'
 while game.running():
-  move, curr_side, next_side = enter_move(side)
+  move = enter_move(game.side)
   try:
     game.make(move)
   except BoxTakenViolation:
@@ -50,4 +49,3 @@ while game.running():
     print(instruction)
   else:
     print_board(game.state)
-    side = next_side
