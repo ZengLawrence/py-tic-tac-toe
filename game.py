@@ -33,7 +33,7 @@ def all_three_same(row):
   return (x in 'xo') and (x == y) and (x == z)
 
 def game_over(state):
-  return winning(state)
+  return winning(state) or stalemate(state)
 
 def winning(state):
   return (
@@ -46,6 +46,9 @@ def winning(state):
     all_three_same([state[0][0], state[1][1], state[2][2]]) or 
     all_three_same([state[0][2], state[1][1], state[2][0]])
     )
+
+def stalemate(state):
+  return all(val in 'xo' for row in state for val in row)
 
 class Game:
   def __init__(self):
@@ -71,3 +74,5 @@ if __name__ == "__main__":
   assert game_over([[' ', ' ', 'o'], [' ', ' ', 'o'], [' ', ' ', 'o']]), "third column is winner"
   assert game_over([['x', ' ', ' '], [' ', 'x', ' '], [' ', ' ', 'x']]), "diagonal is winner"
   assert game_over([[' ', ' ', 'o'], [' ', 'o', ' '], ['o', ' ', ' ']]), "diagonal is winner"
+  assert game_over([['o', 'x', 'x'], ['x', 'x', 'o'], ['o', 'o', 'x']]), "stalemate"
+  assert not game_over([['o', 'x', 'x'], [' ', 'x', 'o'], ['o', 'o', 'x']]), "game is still running"
