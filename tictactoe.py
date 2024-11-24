@@ -1,3 +1,5 @@
+from game import Game
+
 state = [[" ", " ", " "],
          [" ", " ", " "],
          [" ", " ", " "]]
@@ -58,7 +60,8 @@ token = select_token()
 print("You select", token)
 print_board(state)
 side = 'x'
-while True:
+game = Game()
+while game.running():
   move, curr_side, next_side = enter_move(side)
   is_valid, err_msg = validate(move, state)
   if is_valid:
