@@ -26,16 +26,7 @@ def enter_move(side):
   print(instruction)
   return enter_move(side)
 
-def select_token():
-  token = input("Select x or o: ")
-  if (token not in 'xo'):
-    print("Must select x or o.")
-    return select_token()
-  else:
-    return token
-
-token = select_token()
-print("You select", token)
+print(instruction)
 game = Game()
 print_board(game.state)
 while game.running():
