@@ -32,9 +32,6 @@ def all_three_same(row):
   x, y, z = row
   return (x in 'xo') and (x == y) and (x == z)
 
-def game_over(state):
-  return winning(state) or stalemate(state)
-
 def winning(state):
   return (
     all_three_same(state[0]) or 
@@ -71,13 +68,15 @@ class Game:
 
 
 if __name__ == "__main__":
-  assert game_over([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
-  assert game_over([[' ', ' ', ' '], ['x', 'x', 'x'], [' ', ' ', ' ']]), "second row is winner"
-  assert game_over([[' ', ' ', ' '], [' ', ' ', ' '], ['x', 'x', 'x']]), "third row is winner"
-  assert game_over([['o', ' ', ' '], ['o', ' ', ' '], ['o', ' ', ' ']]), "first column is winner"
-  assert game_over([[' ', 'o', ' '], [' ', 'o', ' '], [' ', 'o', ' ']]), "second column is winner"
-  assert game_over([[' ', ' ', 'o'], [' ', ' ', 'o'], [' ', ' ', 'o']]), "third column is winner"
-  assert game_over([['x', ' ', ' '], [' ', 'x', ' '], [' ', ' ', 'x']]), "diagonal is winner"
-  assert game_over([[' ', ' ', 'o'], [' ', 'o', ' '], ['o', ' ', ' ']]), "diagonal is winner"
-  assert game_over([['o', 'x', 'x'], ['x', 'x', 'o'], ['o', 'o', 'x']]), "stalemate"
-  assert not game_over([['o', 'x', 'x'], [' ', 'x', 'o'], ['o', 'o', 'x']]), "game is still running"
+  assert winning([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
+  assert winning([[' ', ' ', ' '], ['x', 'x', 'x'], [' ', ' ', ' ']]), "second row is winner"
+  assert winning([[' ', ' ', ' '], [' ', ' ', ' '], ['x', 'x', 'x']]), "third row is winner"
+  assert winning([['o', ' ', ' '], ['o', ' ', ' '], ['o', ' ', ' ']]), "first column is winner"
+  assert winning([[' ', 'o', ' '], [' ', 'o', ' '], [' ', 'o', ' ']]), "second column is winner"
+  assert winning([[' ', ' ', 'o'], [' ', ' ', 'o'], [' ', ' ', 'o']]), "third column is winner"
+  assert winning([['x', ' ', ' '], [' ', 'x', ' '], [' ', ' ', 'x']]), "diagonal is winner"
+  assert winning([[' ', ' ', 'o'], [' ', 'o', ' '], ['o', ' ', ' ']]), "diagonal is winner"
+  assert stalemate([['o', 'x', 'x'], ['x', 'x', 'o'], ['o', 'o', 'x']]), "stalemate"
+
+  running_game = [['o', 'x', 'x'], [' ', 'x', 'o'], ['o', 'o', 'x']]
+  assert not (winning(running_game) or stalemate(running_game)), "game is still running"
