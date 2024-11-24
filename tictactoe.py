@@ -31,10 +31,10 @@ def enter_move(side):
 
 def validate(move):
   row, col = move
-  if ((row > 0 and row < 4) and (col > 0 and col < 4)):
-    return (True, None)
-  else:
+  if not ((row > 0 and row < 4) and (col > 0 and col < 4)):
     return (False, instruction)
+  return (True, None)
+
 
 def select_token():
   token = input("Select x or o: ")
