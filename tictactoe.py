@@ -9,7 +9,6 @@ def print_board(state):
   for l in b:
     print(l)
 
-next_moves = { 'x': 'o', 'o': 'x'}
 instruction = "Enter 2 digits for the move, for example, 11 for row 1 and column 1. 'q' to quit."
 
 def enter_move(side):
