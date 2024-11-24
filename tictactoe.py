@@ -23,12 +23,18 @@ def enter_move(side):
     try:
       row = int(move[0])
       col = int(move[1])
-      if ((row > 0 and row < 4) and (col > 0 and col < 4)):
-        return (row, col, side, next_moves[side])
+      return (row, col, side, next_moves[side])
     except ValueError:
       pass
   print(help)
   return enter_move(side)
+
+def validate(move):
+  row, col = move
+  if ((row > 0 and row < 4) and (col > 0 and col < 4)):
+    return (True, None)
+  else:
+    return (False, "Enter 2 digits for the move, for example, 11 for row 1 and column 1. 'q' to quit.")
 
 def select_token():
   token = input("Select x or o: ")
@@ -43,7 +49,11 @@ print("You select", token)
 print_board(state)
 side = 'x'
 while True:
-  row, col, side, next_side = enter_move(side)
-  state[row-1][col-1] = side
-  print_board(state)
-  side = next_side
+  row, col, curr_side, next_side = enter_move(side)
+  is_valid, err_msg = validate((row, col))
+  if is_valid:
+    state[row-1][col-1] = curr_side
+    print_board(state)
+    side = next_side
+  else:
+    print(err_msg)
