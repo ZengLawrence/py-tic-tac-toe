@@ -26,6 +26,7 @@ def enter_move(side):
   print(instruction)
   return enter_move(side)
 
+print(instruction)
 game = Game()
 print_board(game.state)
 while game.running():
