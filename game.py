@@ -56,7 +56,7 @@ class Game:
     self.side = 'x'
 
   def running(self):
-    return True;
+    return not game_over(self.state);
 
   def make(self, move):
     # make a move -- tuple of (row, col) in the game, through exception if not valid
