@@ -12,10 +12,10 @@ def print_board(state):
     print(l)
 
 next_moves = { 'x': 'o', 'o': 'x'}
+instruction = "Enter 2 digits for the move, for example, 11 for row 1 and column 1. 'q' to quit."
 
 def enter_move(side):
   # get user entered move and return (row, col)
-  help = "Enter 2 digits for the move, for example, 11 for row 1 and column 1. 'q' to quit."
   move = input("Enter a move for " + side + ": ")
   if move == 'q':
     exit()
@@ -26,7 +26,7 @@ def enter_move(side):
       return ((row, col), side, next_moves[side])
     except ValueError:
       pass
-  print(help)
+  print(instruction)
   return enter_move(side)
 
 def validate(move):
@@ -34,7 +34,7 @@ def validate(move):
   if ((row > 0 and row < 4) and (col > 0 and col < 4)):
     return (True, None)
   else:
-    return (False, "Enter 2 digits for the move, for example, 11 for row 1 and column 1. 'q' to quit.")
+    return (False, instruction)
 
 def select_token():
   token = input("Select x or o: ")
