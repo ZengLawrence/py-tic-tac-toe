@@ -1,9 +1,5 @@
 from game import Game, BoxTakenViolation
 
-state = [[" ", " ", " "],
-         [" ", " ", " "],
-         [" ", " ", " "]]
-
 def print_board(state):
   b = ["--|---|--"] * 5
   sep = " | "
@@ -31,23 +27,6 @@ def enter_move(side):
   print(instruction)
   return enter_move(side)
 
-def get(state, move):
-  row, col = move
-  return state[row-1][col-1]
-
-def set(state, move, side):
-  row, col = move
-  state[row-1][col-1] = side
-
-def validate(move, state):
-  row, col = move
-  if not ((row > 0 and row < 4) and (col > 0 and col < 4)):
-    return (False, instruction)
-  if not (get(state, move) == " "):
-    return (False, "Box %s%s is taken" % move)
-  return (True, None)
-
-
 def select_token():
   token = input("Select x or o: ")
   if (token not in 'xo'):
@@ -72,4 +51,3 @@ while game.running():
   else:
     print_board(game.state)
     side = next_side
-    
