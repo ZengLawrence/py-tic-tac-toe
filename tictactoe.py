@@ -12,7 +12,7 @@ def print_board(state):
     for l in b:
         print(l)
 
-instruction = "Enter 2 digits for the move, for example, 11 for row 1 and column 1. 'q' to quit."
+INSTRUCTION = "Enter 2 digits for the move, for example, 11 for row 1 and column 1. 'q' to quit."
 
 def enter_move(side):
     """get user entered move and return (row, col)"""
@@ -26,10 +26,10 @@ def enter_move(side):
         return (row, col)
       except ValueError:
         pass
-    print(instruction)
+    print(INSTRUCTION)
     return enter_move(side)
 
-print(instruction)
+print(INSTRUCTION)
 game = Game()
 print_board(game.state)
 while game.running():
@@ -39,7 +39,7 @@ while game.running():
     except BoxTakenViolation:
         print("Box %s%s is taken" % move)
     except:
-        print(instruction)
+        print(INSTRUCTION)
     else:
         print_board(game.state)
 print(game.result)
