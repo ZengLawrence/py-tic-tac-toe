@@ -64,23 +64,23 @@ class Game:
     """Class representing game"""
 
     def __init__(self):
-      self.state = init_state()
-      self.side = 'x'
-      self.result = None
+        self.state = init_state()
+        self.side = 'x'
+        self.result = None
 
     def running(self):
-      """Return true if game is running. Game ends if there is a winner or a stalemate."""
-      return self.result is None
+        """Return true if game is running. Game ends if there is a winner or a stalemate."""
+        return self.result is None
 
     def make(self, move):
-      """Make a move -- tuple of (row, col) in the game, through exception if not valid"""
-      validate(move, self.state)
-      set_side(self.state, move, self.side)
-      if winning(self.state):
-        self.result = self.side + " won"
-      if stalemate(self.state):
-        self.result = "stalemate"
-      self.side = next_move(self.side)
+        """Make a move -- tuple of (row, col) in the game, through exception if not valid"""
+        validate(move, self.state)
+        set_side(self.state, move, self.side)
+        if winning(self.state):
+            self.result = self.side + " won"
+        if stalemate(self.state):
+            self.result = "stalemate"
+        self.side = next_move(self.side)
 
 if __name__ == "__main__":
     assert winning([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
