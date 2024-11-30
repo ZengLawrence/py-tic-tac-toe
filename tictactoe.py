@@ -47,4 +47,4 @@ def print_result(game):
     print(game.result)
 
 print(INSTRUCTION)
-Game().start(run = user_move, done = print_result)
+Game().start(per_move = user_move, done = print_result)

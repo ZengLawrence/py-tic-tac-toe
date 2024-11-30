@@ -72,14 +72,14 @@ class Game:
         """Return true if game is running. Game ends if there is a winner or a stalemate."""
         return self.result is None
 
-    def start(self, run, done):
+    def start(self, per_move, done):
         """
-            Starts game. Execute run function repeatedly while the game is running, and done function when the game ends.
+            Starts game. Execute per_move function repeatedly while the game is running, and done function when the game ends.
 
-            Both run and done function takes game instance as input.
+            Both per_move and done function takes game instance as input.
         """
         while self.running():
-            run(self)
+            per_move(self)
         done(self)
 
     def make(self, move):
