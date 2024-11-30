@@ -1,7 +1,7 @@
 """Main module to start the console based game."""
 
 import sys
-from game import Game, BoxTakenViolation
+from game import Game, BoxTakenViolation, RuleViolation
 
 def print_board(state):
     """Print game to the console."""
@@ -39,7 +39,7 @@ while game.running():
         game.make(move)
     except BoxTakenViolation:
         print("Box %s%s is taken" % move)
-    except:
+    except RuleViolation:
         print(INSTRUCTION)
     else:
         print_board(game.state)
