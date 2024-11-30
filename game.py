@@ -17,11 +17,12 @@ def set_side(state, move, side):
     state[row-1][col-1] = side
 
 class RuleViolation(Exception):
-    pass
+    """This is parent Exception class for rule violation."""
+
 class InvalidMoveViolation(RuleViolation):
-    pass
+    """This exception raised when user makes an invalid move."""
 class BoxTakenViolation(RuleViolation):
-    pass
+    """This exception raised when user put a piece to a box already taken,"""
 
 def validate(move, state):
     """Check if move is valid"""
