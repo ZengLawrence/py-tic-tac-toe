@@ -6,12 +6,12 @@ def init_state():
            [" ", " ", " "],
            [" ", " ", " "]]
 
-def get(state, move):
+def get_side(state, move):
     """Utility function to get side taken the box"""
     row, col = move
     return state[row-1][col-1]
 
-def set(state, move, side):
+def set_side(state, move, side):
     """Utility function to set side for the box"""
     row, col = move
     state[row-1][col-1] = side
@@ -25,7 +25,7 @@ def validate(move, state):
     row, col = move
     if not ((row > 0 and row < 4) and (col > 0 and col < 4)):
       raise InvalidMoveViolation()
-    if not (get(state, move) == " "):
+    if not (get_side(state, move) == " "):
       raise BoxTakenViolation()
 
 def next_move(side):
@@ -72,7 +72,7 @@ class Game:
     def make(self, move):
       """mMke a move -- tuple of (row, col) in the game, through exception if not valid"""
       validate(move, self.state)
-      set(self.state, move, self.side)
+      set_side(self.state, move, self.side)
       if winning(self.state):
         self.result = self.side + " won" 
       if stalemate(self.state):
