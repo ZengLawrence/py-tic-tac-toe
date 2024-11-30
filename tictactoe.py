@@ -20,7 +20,7 @@ def enter_move(side):
     move_input = input("Enter a move for " + side + ": ")
     if move_input == 'q':
         sys.exit()
-    if (len(move_input) == 2):
+    if len(move_input) == 2:
         try:
             row = int(move_input[0])
             col = int(move_input[1])
