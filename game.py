@@ -29,7 +29,7 @@ def validate(move, state):
     row, col = move
     if not ((0 < row < 4) and (0 < col < 4)):
         raise InvalidMoveViolation()
-    if not (get_side(state, move) == " "):
+    if not get_side(state, move) == " ":
         raise BoxTakenViolation()
 
 def next_move(side):
