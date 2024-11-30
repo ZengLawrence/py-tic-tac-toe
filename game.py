@@ -27,7 +27,7 @@ class BoxTakenViolation(RuleViolation):
 def validate(move, state):
     """Check if move is valid"""
     row, col = move
-    if not ((row > 0 and row < 4) and (col > 0 and col < 4)):
+    if not ((0 < row < 4) and (0 < col < 4)):
       raise InvalidMoveViolation()
     if not (get_side(state, move) == " "):
       raise BoxTakenViolation()
