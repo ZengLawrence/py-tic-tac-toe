@@ -1,5 +1,6 @@
 """Main module to start the console based game."""
 
+import sys
 from game import Game, BoxTakenViolation
 
 def print_board(state):
@@ -18,7 +19,7 @@ def enter_move(side):
     """get user entered move and return (row, col)"""
     move_input = input("Enter a move for " + side + ": ")
     if move_input == 'q':
-        exit()
+        sys.exit()
     if (len(move_input) == 2):
         try:
             row = int(move_input[0])
