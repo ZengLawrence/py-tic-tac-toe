@@ -18,14 +18,14 @@ def enter_move(side):
     """get user entered move and return (row, col)"""
     move = input("Enter a move for " + side + ": ")
     if move == 'q':
-      exit()
+        exit()
     if (len(move) == 2):
-      try:
-        row = int(move[0])
-        col = int(move[1])
-        return (row, col)
-      except ValueError:
-        pass
+        try:
+            row = int(move[0])
+            col = int(move[1])
+            return (row, col)
+        except ValueError:
+            pass
     print(INSTRUCTION)
     return enter_move(side)
 
