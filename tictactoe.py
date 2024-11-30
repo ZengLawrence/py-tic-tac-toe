@@ -30,10 +30,8 @@ def enter_move(side):
     print(INSTRUCTION)
     return enter_move(side)
 
-print(INSTRUCTION)
-game = Game()
-print_board(game.state)
-while game.running():
+def user_move(game):
+    """User enters a move."""
     move = enter_move(game.side)
     try:
         game.make(move)
@@ -43,4 +41,10 @@ while game.running():
         print(INSTRUCTION)
     else:
         print_board(game.state)
-print(game.result)
+
+def print_result(game):
+    """Print game result."""
+    print(game.result)
+
+print(INSTRUCTION)
+Game().start(run = user_move, done = print_result)
