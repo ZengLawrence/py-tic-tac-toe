@@ -1,6 +1,9 @@
+"""Main module to start the console based game."""
+
 from game import Game, BoxTakenViolation
 
 def print_board(state):
+    """Print game to the console."""
     b = ["--|---|--"] * 5
     sep = " | "
     b[0] = sep.join(state[0])
@@ -12,7 +15,7 @@ def print_board(state):
 instruction = "Enter 2 digits for the move, for example, 11 for row 1 and column 1. 'q' to quit."
 
 def enter_move(side):
-    # get user entered move and return (row, col)
+    """get user entered move and return (row, col)"""
     move = input("Enter a move for " + side + ": ")
     if move == 'q':
       exit()

@@ -1,21 +1,27 @@
+""" Module implements game rules"""
+
 def init_state():
+    """ Initialize state"""
     return [[" ", " ", " "],
            [" ", " ", " "],
            [" ", " ", " "]]
 
 def get(state, move):
+    """Utility function to get side taken the box"""
     row, col = move
     return state[row-1][col-1]
 
 def set(state, move, side):
-      row, col = move
-      state[row-1][col-1] = side
+    """Utility function to set side for the box"""
+    row, col = move
+    state[row-1][col-1] = side
 
 class RuleViolation(Exception): pass
 class InvalidMoveViolation(RuleViolation): pass
 class BoxTakenViolation(RuleViolation): pass
 
 def validate(move, state):
+    """Check if move is valid"""
     row, col = move
     if not ((row > 0 and row < 4) and (col > 0 and col < 4)):
       raise InvalidMoveViolation()
@@ -23,16 +29,19 @@ def validate(move, state):
       raise BoxTakenViolation()
 
 def next_move(side):
+    """Return side for next move"""
     if side == 'x':
       return 'o'
     else:
       return 'x'
 
 def all_three_same(row):
+    """Return true if all three in a row is the same side"""
     x, y, z = row
     return (x in 'xo') and (x == y) and (x == z)
 
 def winning(state):
+    """Return true if there is a winning row, column or diagonal"""
     return (
       all_three_same(state[0]) or 
       all_three_same(state[1]) or 
@@ -45,19 +54,23 @@ def winning(state):
       )
 
 def stalemate(state):
+    """Return true if game ends in stalemate"""
     return all(val in 'xo' for row in state for val in row)
 
 class Game:
+    """Class representing game"""
+
     def __init__(self):
       self.state = init_state()
       self.side = 'x'
       self.result = None
 
     def running(self):
+      """Return true if game is running. Game ends if there is a winner or a stalemate."""
       return self.result is None
 
     def make(self, move):
-      # make a move -- tuple of (row, col) in the game, through exception if not valid
+      """mMke a move -- tuple of (row, col) in the game, through exception if not valid"""
       validate(move, self.state)
       set(self.state, move, self.side)
       if winning(self.state):
