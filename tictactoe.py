@@ -16,13 +16,13 @@ INSTRUCTION = "Enter 2 digits for the move, for example, 11 for row 1 and column
 
 def enter_move(side):
     """get user entered move and return (row, col)"""
-    move = input("Enter a move for " + side + ": ")
-    if move == 'q':
+    move_input = input("Enter a move for " + side + ": ")
+    if move_input == 'q':
         exit()
-    if (len(move) == 2):
+    if (len(move_input) == 2):
         try:
-            row = int(move[0])
-            col = int(move[1])
+            row = int(move_input[0])
+            col = int(move_input[1])
             return (row, col)
         except ValueError:
             pass
