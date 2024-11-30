@@ -38,7 +38,7 @@ while game.running():
     try:
         game.make(move)
     except BoxTakenViolation:
-        print("Box %s%s is taken" % move)
+        print(f"Box {move[0]}{move[1]} is taken")
     except RuleViolation:
         print(INSTRUCTION)
     else:
