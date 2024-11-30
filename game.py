@@ -73,7 +73,7 @@ class Game:
       return self.result is None
 
     def make(self, move):
-      """mMke a move -- tuple of (row, col) in the game, through exception if not valid"""
+      """Make a move -- tuple of (row, col) in the game, through exception if not valid"""
       validate(move, self.state)
       set_side(self.state, move, self.side)
       if winning(self.state):
