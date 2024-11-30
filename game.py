@@ -28,9 +28,9 @@ def validate(move, state):
     """Check if move is valid"""
     row, col = move
     if not ((0 < row < 4) and (0 < col < 4)):
-      raise InvalidMoveViolation()
+        raise InvalidMoveViolation()
     if not (get_side(state, move) == " "):
-      raise BoxTakenViolation()
+        raise BoxTakenViolation()
 
 def next_move(side):
     """Return side for next move"""
