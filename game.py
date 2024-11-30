@@ -16,9 +16,12 @@ def set_side(state, move, side):
     row, col = move
     state[row-1][col-1] = side
 
-class RuleViolation(Exception): pass
-class InvalidMoveViolation(RuleViolation): pass
-class BoxTakenViolation(RuleViolation): pass
+class RuleViolation(Exception):
+    pass
+class InvalidMoveViolation(RuleViolation):
+    pass
+class BoxTakenViolation(RuleViolation):
+    pass
 
 def validate(move, state):
     """Check if move is valid"""
@@ -43,13 +46,13 @@ def all_three_same(row):
 def winning(state):
     """Return true if there is a winning row, column or diagonal"""
     return (
-      all_three_same(state[0]) or 
-      all_three_same(state[1]) or 
-      all_three_same(state[2]) or 
-      all_three_same([state[0][0], state[1][0], state[2][0]]) or 
-      all_three_same([state[0][1], state[1][1], state[2][1]]) or 
-      all_three_same([state[0][2], state[1][2], state[2][2]]) or 
-      all_three_same([state[0][0], state[1][1], state[2][2]]) or 
+      all_three_same(state[0]) or
+      all_three_same(state[1]) or
+      all_three_same(state[2]) or
+      all_three_same([state[0][0], state[1][0], state[2][0]]) or
+      all_three_same([state[0][1], state[1][1], state[2][1]]) or
+      all_three_same([state[0][2], state[1][2], state[2][2]]) or
+      all_three_same([state[0][0], state[1][1], state[2][2]]) or
       all_three_same([state[0][2], state[1][1], state[2][0]])
       )
 
@@ -74,7 +77,7 @@ class Game:
       validate(move, self.state)
       set_side(self.state, move, self.side)
       if winning(self.state):
-        self.result = self.side + " won" 
+        self.result = self.side + " won"
       if stalemate(self.state):
         self.result = "stalemate"
       self.side = next_move(self.side)
