@@ -10,7 +10,7 @@ def print_board(state):
     b[2] = sep.join(state[1])
     b[4] = sep.join(state[2])
     for l in b:
-      print(l)
+        print(l)
 
 instruction = "Enter 2 digits for the move, for example, 11 for row 1 and column 1. 'q' to quit."
 
@@ -35,11 +35,11 @@ print_board(game.state)
 while game.running():
     move = enter_move(game.side)
     try:
-      game.make(move)
+        game.make(move)
     except BoxTakenViolation:
-      print("Box %s%s is taken" % move)
+        print("Box %s%s is taken" % move)
     except:
-      print(instruction)
+        print(instruction)
     else:
-      print_board(game.state)
+        print_board(game.state)
 print(game.result)
