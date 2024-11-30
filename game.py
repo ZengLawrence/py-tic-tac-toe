@@ -35,9 +35,8 @@ def validate(move, state):
 def next_move(side):
     """Return side for next move"""
     if side == 'x':
-      return 'o'
-    else:
-      return 'x'
+        return 'o'
+    return 'x'
 
 def all_three_same(row):
     """Return true if all three in a row is the same side"""
