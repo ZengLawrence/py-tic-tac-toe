@@ -74,7 +74,8 @@ class Game:
 
     def start(self, per_move, done):
         """
-            Starts game. Execute per_move function repeatedly while the game is running, and done function when the game ends.
+            Starts game. Execute per_move function repeatedly while the game is running, 
+            and done function when the game ends.
 
             Both per_move and done function takes game instance as input.
         """
