@@ -63,11 +63,16 @@ def enter_players():
         return int(n)
     return enter_players()
 
+def enter_side():
+    """Get side for human player from console and return the side"""
+    side = input("Choose side (x or o): ")
+    if side in "xo":
+        return side
+    return enter_side()
+
 per_move = two_player_game
 if enter_players() == 1:
-    human_side = input("Choose side (x or o): ")
-    if not human_side in "xo":
-        human_side = 'o'
+    human_side = enter_side()
     def one_player_game(game):
         """Game for one player"""
         if game.side == human_side:
