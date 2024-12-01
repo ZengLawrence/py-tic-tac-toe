@@ -59,9 +59,8 @@ two_player_game = user_move
 per_move = two_player_game
 players = input("How many players (1 or 2): ")
 if players == '1':
-    side = input("Choose side (x or o): ")
-    human_side = 'x'
-    if side == 'o':
+    human_side = input("Choose side (x or o): ")
+    if not human_side in "xo":
         human_side = 'o'
     def one_player_game(game):
         """Game for one player"""
