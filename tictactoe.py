@@ -1,5 +1,6 @@
 """Main module to start the console based game."""
 
+import random
 import sys
 from game import Game, BoxTakenViolation, RuleViolation
 
@@ -42,9 +43,31 @@ def user_move(game):
     else:
         print_board(game.state)
 
+def computer_move(game):
+    """Computer enters a randomly selected move."""
+    move = random.choice(game.empty_boxes())
+    print(f"Computer takes {move[0]}{move[1]} for {game.side}.")
+    game.make(move)
+    print_board(game.state)
+
 def print_result(game):
     """Print game result."""
     print(game.result)
 
+two_player_game = user_move
+def one_player_game(game, human_side):
+    if game.side == human_side:
+        return user_move(game)
+    return computer_move(game)
+
+per_move = two_player_game
+players = input("How many players (1 or 2): ")
+game = Game()
+if players == '1':
+    side = input("Choose side (x or o): ")
+    human_side = 'x'
+    if side == 'o':
+        human_side = 'o'
+    per_move = lambda _game: one_player_game(_game, human_side)
 print(INSTRUCTION)
-Game().start(per_move = user_move, done = print_result)
+game.start(per_move, done = print_result)
