@@ -32,7 +32,7 @@ def validate(move, state):
     if not get_side(state, move) == " ":
         raise BoxTakenViolation()
 
-def next_move(side):
+def next_side(side):
     """Return side for next move"""
     if side == 'x':
         return 'o'
@@ -90,7 +90,7 @@ class Game:
             self.result = self.side + " won"
         if stalemate(self.state):
             self.result = "stalemate"
-        self.side = next_move(self.side)
+        self.side = next_side(self.side)
 
 if __name__ == "__main__":
     assert winning([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
