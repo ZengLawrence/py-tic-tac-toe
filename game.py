@@ -6,14 +6,14 @@ def init_state():
            [" ", " ", " "],
            [" ", " ", " "]]
 
-def get_side(state, move):
+def get_side(state, box):
     """Utility function to get side taken the box"""
-    row, col = move
+    row, col = box
     return state[row-1][col-1]
 
-def set_side(state, move, side):
+def set_side(state, box, side):
     """Utility function to set side for the box"""
-    row, col = move
+    row, col = box
     state[row-1][col-1] = side
 
 class RuleViolation(Exception):
