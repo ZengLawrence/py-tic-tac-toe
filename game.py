@@ -6,14 +6,14 @@ def init_state():
            [" ", " ", " "],
            [" ", " ", " "]]
 
-def get_side(state, move):
+def get_side(state, box):
     """Utility function to get side taken the box"""
-    row, col = move
+    row, col = box
     return state[row-1][col-1]
 
-def set_side(state, move, side):
+def set_side(state, box, side):
     """Utility function to set side for the box"""
-    row, col = move
+    row, col = box
     state[row-1][col-1] = side
 
 class RuleViolation(Exception):
@@ -25,25 +25,25 @@ class BoxTakenViolation(RuleViolation):
     """This exception raised when user put a piece to a box already taken,"""
 
 def validate(move, state):
-    """Check if move is valid"""
+    """Check if a move is valid"""
     row, col = move
     if not ((0 < row < 4) and (0 < col < 4)):
         raise InvalidMoveViolation()
     if not get_side(state, move) == " ":
         raise BoxTakenViolation()
 
-def next_move(side):
+def next_side(side):
     """Return side for next move"""
     if side == 'x':
         return 'o'
     return 'x'
 
 def all_three_same(row):
-    """Return true if all three in a row is the same side"""
+    """Return true if all three boxes in a row are the same side"""
     x, y, z = row
     return (x in 'xo') and (x == y) and (x == z)
 
-def winning(state):
+def winner(state):
     """Return true if there is a winning row, column or diagonal"""
     return (
       all_three_same(state[0]) or
@@ -86,22 +86,22 @@ class Game:
         """Make a move -- tuple of (row, col) in the game, through exception if not valid"""
         validate(move, self.state)
         set_side(self.state, move, self.side)
-        if winning(self.state):
+        if winner(self.state):
             self.result = self.side + " won"
         if stalemate(self.state):
             self.result = "stalemate"
-        self.side = next_move(self.side)
+        self.side = next_side(self.side)
 
 if __name__ == "__main__":
-    assert winning([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
-    assert winning([[' ', ' ', ' '], ['x', 'x', 'x'], [' ', ' ', ' ']]), "second row is winner"
-    assert winning([[' ', ' ', ' '], [' ', ' ', ' '], ['x', 'x', 'x']]), "third row is winner"
-    assert winning([['o', ' ', ' '], ['o', ' ', ' '], ['o', ' ', ' ']]), "first column is winner"
-    assert winning([[' ', 'o', ' '], [' ', 'o', ' '], [' ', 'o', ' ']]), "second column is winner"
-    assert winning([[' ', ' ', 'o'], [' ', ' ', 'o'], [' ', ' ', 'o']]), "third column is winner"
-    assert winning([['x', ' ', ' '], [' ', 'x', ' '], [' ', ' ', 'x']]), "diagonal is winner"
-    assert winning([[' ', ' ', 'o'], [' ', 'o', ' '], ['o', ' ', ' ']]), "diagonal is winner"
+    assert winner([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
+    assert winner([[' ', ' ', ' '], ['x', 'x', 'x'], [' ', ' ', ' ']]), "second row is winner"
+    assert winner([[' ', ' ', ' '], [' ', ' ', ' '], ['x', 'x', 'x']]), "third row is winner"
+    assert winner([['o', ' ', ' '], ['o', ' ', ' '], ['o', ' ', ' ']]), "first column is winner"
+    assert winner([[' ', 'o', ' '], [' ', 'o', ' '], [' ', 'o', ' ']]), "second column is winner"
+    assert winner([[' ', ' ', 'o'], [' ', ' ', 'o'], [' ', ' ', 'o']]), "third column is winner"
+    assert winner([['x', ' ', ' '], [' ', 'x', ' '], [' ', ' ', 'x']]), "diagonal is winner"
+    assert winner([[' ', ' ', 'o'], [' ', 'o', ' '], ['o', ' ', ' ']]), "diagonal is winner"
     assert stalemate([['o', 'x', 'x'], ['x', 'x', 'o'], ['o', 'o', 'x']]), "stalemate"
 
     running_game = [['o', 'x', 'x'], [' ', 'x', 'o'], ['o', 'o', 'x']]
-    assert not (winning(running_game) or stalemate(running_game)), "game is still running"
+    assert not (winner(running_game) or stalemate(running_game)), "game is still running"
