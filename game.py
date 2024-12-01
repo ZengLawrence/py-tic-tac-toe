@@ -74,7 +74,8 @@ class Game:
 
     def start(self, per_move, done):
         """
-            Starts game. Execute per_move function repeatedly while the game is running, and done function when the game ends.
+            Starts game. Execute per_move function repeatedly while the game is running, 
+            and done function when the game ends.
 
             Both per_move and done function takes game instance as input.
         """
@@ -92,6 +93,12 @@ class Game:
             self.result = "stalemate"
         self.side = next_side(self.side)
 
+    def empty_boxes(self):
+        """Return all empty boxes on the board."""
+        return [(i+1, j+1) for (i, row) in enumerate(self.state)
+                           for (j, v) in enumerate(row)
+                           if v == " "]
+
 if __name__ == "__main__":
     assert winner([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
     assert winner([[' ', ' ', ' '], ['x', 'x', 'x'], [' ', ' ', ' ']]), "second row is winner"
@@ -105,3 +112,6 @@ if __name__ == "__main__":
 
     running_game = [['o', 'x', 'x'], [' ', 'x', 'o'], ['o', 'o', 'x']]
     assert not (winner(running_game) or stalemate(running_game)), "game is still running"
+
+    game = Game()
+    assert Game.empty_boxes(game) == [(1,1), (1,2), (1,3), (2,1), (2,2), (2,3), (3,1), (3,2), (3,3)]
