@@ -93,6 +93,10 @@ class Game:
             self.result = "stalemate"
         self.side = next_side(self.side)
 
+    def empty_boxes(self):
+        """Return all empty boxes on the board."""
+        return [(1, x[0]+1) for x in enumerate(self.state[0]) if x[1] == " "] + [(2, x[0]+1) for x in enumerate(self.state[1]) if x[1] == " "] + [(3, x[0]+1) for x in enumerate(self.state[2]) if x[1] == " "]
+
 if __name__ == "__main__":
     assert winner([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
     assert winner([[' ', ' ', ' '], ['x', 'x', 'x'], [' ', ' ', ' ']]), "second row is winner"
@@ -106,3 +110,6 @@ if __name__ == "__main__":
 
     running_game = [['o', 'x', 'x'], [' ', 'x', 'o'], ['o', 'o', 'x']]
     assert not (winner(running_game) or stalemate(running_game)), "game is still running"
+
+    game = Game()
+    assert Game.empty_boxes(game) == [(1,1), (1,2), (1,3), (2,1), (2,2), (2,3), (3,1), (3,2), (3,3)]
