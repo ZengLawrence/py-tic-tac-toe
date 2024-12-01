@@ -70,7 +70,6 @@ def enter_side():
         return side
     return enter_side()
 
-per_move = two_player_game
 if enter_players() == 1:
     human_side = enter_side()
     def one_player_game(game):
@@ -79,5 +78,7 @@ if enter_players() == 1:
             return user_move(game)
         return computer_move(game)
     per_move = one_player_game
+else:
+    per_move = two_player_game
 print(INSTRUCTION)
 Game().start(per_move, done = print_result)
