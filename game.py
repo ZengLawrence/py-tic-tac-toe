@@ -25,7 +25,7 @@ class BoxTakenViolation(RuleViolation):
     """This exception raised when user put a piece to a box already taken,"""
 
 def validate(move, state):
-    """Check if move is valid"""
+    """Check if a move is valid"""
     row, col = move
     if not ((0 < row < 4) and (0 < col < 4)):
         raise InvalidMoveViolation()
@@ -39,7 +39,7 @@ def next_side(side):
     return 'x'
 
 def all_three_same(row):
-    """Return true if all three in a row is the same side"""
+    """Return true if all three boxes in a row are the same side"""
     x, y, z = row
     return (x in 'xo') and (x == y) and (x == z)
 
