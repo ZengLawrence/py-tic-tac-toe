@@ -96,7 +96,8 @@ class Game:
     def empty_boxes(self):
         """Return all empty boxes on the board."""
         return [(i+1, j+1) for (i, row) in enumerate(self.state)
-                           for (j, v) in enumerate(row) if v == " "]
+                           for (j, v) in enumerate(row)
+                           if v == " "]
 
 if __name__ == "__main__":
     assert winner([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
