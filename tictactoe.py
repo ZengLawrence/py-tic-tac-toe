@@ -55,19 +55,19 @@ def print_result(game):
     print(game.result)
 
 two_player_game = user_move
-def one_player_game(game, human_side):
-    if game.side == human_side:
-        return user_move(game)
-    return computer_move(game)
 
 per_move = two_player_game
 players = input("How many players (1 or 2): ")
-game = Game()
 if players == '1':
     side = input("Choose side (x or o): ")
     human_side = 'x'
     if side == 'o':
         human_side = 'o'
-    per_move = lambda _game: one_player_game(_game, human_side)
+    def one_player_game(game):
+        """Game for one player"""
+        if game.side == human_side:
+            return user_move(game)
+        return computer_move(game)
+    per_move = one_player_game
 print(INSTRUCTION)
-game.start(per_move, done = print_result)
+Game().start(per_move, done = print_result)
