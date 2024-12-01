@@ -56,9 +56,15 @@ def print_result(game):
 
 two_player_game = user_move
 
+def enter_players():
+    """Get number of players from console and return the number"""
+    n = input("How many players (1 or 2): ")
+    if n in ('1', '2'):
+        return int(n)
+    return enter_players()
+
 per_move = two_player_game
-players = input("How many players (1 or 2): ")
-if players == '1':
+if enter_players() == 1:
     human_side = input("Choose side (x or o): ")
     if not human_side in "xo":
         human_side = 'o'
