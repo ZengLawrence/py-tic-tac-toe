@@ -56,8 +56,8 @@ def winner(state):
       all_three_same([state[0][2], state[1][1], state[2][0]])
       )
 
-def stalemate(state):
-    """Return true if game ends in stalemate"""
+def tie(state):
+    """Return true if game ends in a tie"""
     return all(val in 'xo' for row in state for val in row)
 
 class Game:
@@ -69,7 +69,7 @@ class Game:
         self.result = None
 
     def running(self):
-        """Return true if game is running. Game ends if there is a winner or a stalemate."""
+        """Return true if game is running. Game ends if there is a winner or a tie."""
         return self.result is None
 
     def start(self, per_move, done):
@@ -89,8 +89,8 @@ class Game:
         set_side(self.state, move, self.side)
         if winner(self.state):
             self.result = self.side + " won"
-        if stalemate(self.state):
-            self.result = "stalemate"
+        if tie(self.state):
+            self.result = "tie"
         self.side = next_side(self.side)
 
     def empty_boxes(self):
@@ -108,10 +108,10 @@ if __name__ == "__main__":
     assert winner([[' ', ' ', 'o'], [' ', ' ', 'o'], [' ', ' ', 'o']]), "third column is winner"
     assert winner([['x', ' ', ' '], [' ', 'x', ' '], [' ', ' ', 'x']]), "diagonal is winner"
     assert winner([[' ', ' ', 'o'], [' ', 'o', ' '], ['o', ' ', ' ']]), "diagonal is winner"
-    assert stalemate([['o', 'x', 'x'], ['x', 'x', 'o'], ['o', 'o', 'x']]), "stalemate"
+    assert tie([['o', 'x', 'x'], ['x', 'x', 'o'], ['o', 'o', 'x']]), "tie"
 
     running_game = [['o', 'x', 'x'], [' ', 'x', 'o'], ['o', 'o', 'x']]
-    assert not (winner(running_game) or stalemate(running_game)), "game is still running"
+    assert not (winner(running_game) or tie(running_game)), "game is still running"
 
     game = Game()
     assert Game.empty_boxes(game) == [(1,1), (1,2), (1,3), (2,1), (2,2), (2,3), (3,1), (3,2), (3,3)]
