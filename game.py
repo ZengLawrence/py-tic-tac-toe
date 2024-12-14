@@ -68,7 +68,7 @@ class Game:
         self.side = 'x'
         self.result = None
 
-    def running(self):
+    def __running(self):
         """Return true if game is running. Game ends if there is a winner or a tie."""
         return self.result is None
 
@@ -79,7 +79,7 @@ class Game:
 
             Both per_move and done function takes game instance as input.
         """
-        while self.running():
+        while self.__running():
             per_move(self)
         done(self)
 
