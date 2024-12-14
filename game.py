@@ -67,6 +67,8 @@ class Game:
         self.state = init_state()
         self.side = 'x'
         self.result = None
+        self.per_move = None
+        self.done = None
 
     def __running(self):
         """Return true if game is running. Game ends if there is a winner or a tie."""
