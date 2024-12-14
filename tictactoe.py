@@ -54,8 +54,6 @@ def print_result(game):
     """Print game result."""
     print(game.result)
 
-two_player_game = user_move
-
 def enter_players():
     """Get number of players from console and return the number"""
     n = input("How many players (1 or 2): ")
@@ -70,6 +68,7 @@ def enter_side():
         return side
     return enter_side()
 
+two_player_game = user_move
 if enter_players() == 1:
     human_side = enter_side()
     def one_player_game(game):
