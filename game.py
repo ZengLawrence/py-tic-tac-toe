@@ -79,9 +79,17 @@ class Game:
 
             Both per_move and done function takes game instance as input.
         """
-        while self.__running():
-            per_move(self)
-        done(self)
+        self.per_move = per_move
+        self.done = done
+        self.__per_move()
+
+    def __per_move(self):
+        if self.per_move:
+            self.per_move(self)
+            if self.__running():
+                self.__per_move()
+            else:
+                self.done(self)
 
     def make(self, move):
         """
