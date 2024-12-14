@@ -84,7 +84,10 @@ class Game:
         done(self)
 
     def make(self, move):
-        """Make a move -- tuple of (row, col) in the game, throws subclass of RuleViolation if not valid"""
+        """
+            Make a move -- a tuple of (row, col) in the game, throws subclass of RuleViolation 
+            if not valid.
+        """
         validate(move, self.state)
         set_side(self.state, move, self.side)
         if winner(self.state):
