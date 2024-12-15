@@ -14,9 +14,9 @@ def init_button(frame, text, col, row):
 
 def init_board(frame, game):
     """Initialize board with game state"""
-    return [init_button(frame, cell, col=i, row=j)
+    return [init_button(frame, btn_text, col=i, row=j)
             for (j, row) in enumerate(game.state)
-            for (i, cell) in enumerate(row)]
+            for (i, btn_text) in enumerate(row)]
 
 root = Tk()
 frm = ttk.Frame(root, padding=10)
