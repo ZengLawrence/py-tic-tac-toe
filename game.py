@@ -60,9 +60,6 @@ def tie(state):
     """Return true if game ends in a tie"""
     return all(val in 'xo' for row in state for val in row)
 
-def no_ops(_game):
-    """Place holder function that take one argument 'game'"""
-
 class Game:
     """Class representing game"""
 
@@ -70,8 +67,6 @@ class Game:
         self.state = init_state()
         self.side = 'x'
         self.result = None
-        self.per_move = no_ops
-        self.done = no_ops
 
     def __running(self):
         """Return true if game is running. Game ends if there is a winner or a tie."""
@@ -84,19 +79,9 @@ class Game:
 
             Both per_move and done function takes game instance as input.
         """
-        if per_move:
-            self.per_move = per_move
-        if done:
-            self.done = done
-        self.__per_move()
-
-    def __per_move(self):
-        if self.per_move:
-            self.per_move(self)
-            if self.__running():
-                self.__per_move()
-            else:
-                self.done(self)
+        while self.__running():
+            per_move(self)
+        done(self)
 
     def make(self, move):
         """
