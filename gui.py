@@ -4,17 +4,17 @@ from tkinter import Tk
 from tkinter import ttk
 from game import Game
 
-def init_button(frame, text, col, row):
+def init_button(frame, text, game, col, row):
     """Initialize button in board"""
-    def update_text():
-        btn["text"] = "clicked!"
-    btn = ttk.Button(frame, text=text, command=update_text)
+    def make_move():
+        game.make((row+1, col+1))
+    btn = ttk.Button(frame, text=text, command=make_move)
     btn.grid(column=col, row=row)
     return btn
 
 def init_board(frame, game):
     """Initialize board with game state"""
-    return [init_button(frame, btn_text, col=i, row=j)
+    return [init_button(frame, btn_text, game, col=i, row=j)
             for (j, row) in enumerate(game.state)
             for (i, btn_text) in enumerate(row)]
 
