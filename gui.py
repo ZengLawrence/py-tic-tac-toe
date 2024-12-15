@@ -14,9 +14,9 @@ def init_button(frame, text, game, col, row):
 
 def init_board(frame, game):
     """Initialize board with game state"""
-    return [[init_button(frame, btn_text, game, col=i, row=j)
-            for (i, btn_text) in enumerate(row)]
-            for (j, row) in enumerate(game.state)]
+    return [[init_button(frame, btn_text, game, col=j, row=i)
+            for (j, btn_text) in enumerate(row)]
+            for (i, row) in enumerate(game.state)]
 
 def refresh_board(board, state):
     """Refresh board with game state"""
