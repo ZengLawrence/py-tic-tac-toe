@@ -26,6 +26,7 @@ def refresh_board(board, state):
             btn["text"] = btn_text
 
 root = Tk()
+root.title("Tic Tac Too")
 frm = ttk.Frame(root, padding=10)
 frm.grid()
 game = Game()
