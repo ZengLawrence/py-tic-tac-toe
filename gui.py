@@ -5,7 +5,9 @@ from tkinter import ttk
 
 def init_button(frame, col, row):
     """Initialize button in board"""
-    btn = ttk.Button(frame, text=" ")
+    def update_text():
+        btn["text"] = "clicked!"
+    btn = ttk.Button(frame, text=" ", command=update_text)
     btn.grid(column=col, row=row)
     return btn
 
