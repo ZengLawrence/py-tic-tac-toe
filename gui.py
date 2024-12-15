@@ -1,3 +1,5 @@
+"""Module for GUI app"""
+
 from tkinter import Tk
 from tkinter import ttk
 root = Tk()
