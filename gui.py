@@ -42,7 +42,7 @@ class App:
         self.board_frame.grid()
         game = Game()
         self.board = init_board(self.board_frame, game)
-        game.register(lambda game: self.__refresh(game))
+        game.register(self.__refresh)
         ttk.Button(self.frm, text="Quit", command=self.root.destroy).grid()
 
     def run(self):
