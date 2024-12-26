@@ -25,15 +25,24 @@ def refresh_board(board, state):
             btn = board[i][j]
             btn["text"] = btn_text
 
-root = Tk()
-root.title("Tic Tac Too")
-frm = ttk.Frame(root, padding=10)
-frm.grid()
-ttk.Label(frm, text="Click on a box").grid()
-board_frame = ttk.Frame(frm)
-board_frame.grid()
-game = Game()
-board = init_board(board_frame, game)
-game.register(lambda game: refresh_board(board, game.state))
-ttk.Button(frm, text="Quit", command=root.destroy).grid()
-root.mainloop()
+class App:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Tic Tac Too")
+        self.frm = ttk.Frame(root, padding=10)
+        self.frm.grid()
+        ttk.Label(self.frm, text="Click on a box").grid()
+        self.board_frame = ttk.Frame(self.frm)
+        self.board_frame.grid()
+        self.game = Game()
+        self.board = init_board(self.board_frame, self.game)
+        self.game.register(lambda game: refresh_board(self.board, game.state))
+        ttk.Button(self.frm, text="Quit", command=self.root.destroy).grid()
+
+    def run(self):
+        self.root.mainloop()
+
+if __name__ == "__main__":
+    root = Tk()
+    app = App(root)
+    app.run()
