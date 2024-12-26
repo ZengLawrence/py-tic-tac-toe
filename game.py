@@ -67,6 +67,7 @@ class Game:
         self.state = init_state()
         self.side = 'x'
         self.result = None
+        self.callback = None
 
     def __running(self):
         """Return true if game is running. Game ends if there is a winner or a tie."""
@@ -83,6 +84,11 @@ class Game:
             per_move(self)
         done(self)
 
+    def register(self, callback):
+        """Register callback function for state change event"""
+        assert callable(callback)
+        self.callback = callback
+
     def make(self, move):
         """
             Make a move -- a tuple of (row, col) in the game, throws subclass of RuleViolation 
@@ -95,6 +101,8 @@ class Game:
         if tie(self.state):
             self.result = "tie"
         self.side = next_side(self.side)
+        if self.callback:
+            self.callback(self)
 
     def empty_boxes(self):
         """Return all empty boxes on the board."""
