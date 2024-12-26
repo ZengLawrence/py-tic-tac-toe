@@ -46,14 +46,17 @@ class App:
     def __init__(self, root):
         self.root = root
         self.root.title("Tic Tac Toe")
+        game = Game()
+        self.__layout(game)
+        game.register(self.refresh)
+
+    def __layout(self, game):
         _frm = ttk.Frame(self.root, padding=10)
         _frm.grid()
-        game = Game()
         self.status = init_status(_frm, game)
         self.status.grid(sticky="w")
         self.board, _board_frame = init_board(_frm, game)
         _board_frame.grid()
-        game.register(self.refresh)
         ttk.Button(_frm, text="Quit", command=self.root.destroy).grid()
 
     def run(self):
