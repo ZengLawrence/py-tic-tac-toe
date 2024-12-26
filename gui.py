@@ -14,9 +14,11 @@ def init_button(frame, text, game, col, row):
 
 def init_board(frame, game):
     """Initialize board with game state"""
-    return [[init_button(frame, btn_text, game, row=i, col=j)
+    _board_frame = ttk.Frame(frame)
+    _board = [[init_button(_board_frame, btn_text, game, row=i, col=j)
             for (j, btn_text) in enumerate(row)]
             for (i, row) in enumerate(game.state)]
+    return (_board, _board_frame)
 
 def refresh_board(board, game):
     """Refresh board with game state"""
@@ -41,31 +43,32 @@ def status_text(game):
 
 class App:
     """Class for GUI app"""
-    def __init__(self, master):
-        self.root = master
+    def __init__(self, root):
+        self.root = root
         self.root.title("Tic Tac Toe")
-        self.frm = ttk.Frame(self.root, padding=10)
-        self.frm.grid()
         game = Game()
-        self.status = init_status(self.frm, game)
+        self.__layout(game)
+        game.register(self.refresh)
+
+    def __layout(self, game):
+        _frm = ttk.Frame(self.root, padding=10)
+        _frm.grid()
+        self.status = init_status(_frm, game)
         self.status.grid(sticky="w")
-        self.board_frame = ttk.Frame(self.frm)
-        self.board_frame.grid()
-        self.board = init_board(self.board_frame, game)
-        game.register(self.__refresh)
-        ttk.Button(self.frm, text="Quit", command=self.root.destroy).grid()
+        self.board, _board_frame = init_board(_frm, game)
+        _board_frame.grid()
+        ttk.Button(_frm, text="Quit", command=self.root.destroy).grid()
 
     def run(self):
         """Run the app"""
         self.root.mainloop()
-    
-    def __refresh(self, game):
+
+    def refresh(self, game):
         """Refresh the app"""
         refresh_status(self.status, game)
         refresh_board(self.board, game)
         self.root.update()
 
 if __name__ == "__main__":
-    root = Tk()
-    app = App(root)
-    app.run()
+    _root = Tk()
+    App(_root).run()
