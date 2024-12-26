@@ -58,7 +58,7 @@ class App:
     def run(self):
         """Run the app"""
         self.root.mainloop()
-    
+
     def __refresh(self, game):
         """Refresh the app"""
         refresh_status(self.status, game)
