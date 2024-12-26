@@ -70,8 +70,8 @@ def enter_side():
 
 class Console:
     """Class represent console based game. Used for user interactions."""
-    def start(self):
-        """Start console game"""
+    def run(self):
+        """Run console game"""
         two_player_game = user_move
         if enter_players() == 1:
             human_side = enter_side()
