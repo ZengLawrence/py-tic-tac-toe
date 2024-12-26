@@ -43,7 +43,7 @@ def status_text(game):
 
 class App:
     """Class for GUI app"""
-    def __init__(self, root):
+    def __init__(self, root=Tk()):
         self.root = root
         self.root.title("Tic Tac Toe")
         game = Game()
@@ -70,5 +70,4 @@ class App:
         self.root.update()
 
 if __name__ == "__main__":
-    _root = Tk()
-    App(_root).run()
+    App().run()

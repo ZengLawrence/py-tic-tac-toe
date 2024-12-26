@@ -1,7 +1,6 @@
 """Main module to start the game."""
 
 import argparse
-import tkinter as tk
 from console import Console
 from gui import App
 
@@ -11,9 +10,7 @@ def main():
     args = parser.parse_args()
 
     if args.gui:
-        root = tk.Tk()
-        app = App(root)
-        root.mainloop()
+        App().run()
     else:
         Console().start()
 
