@@ -24,7 +24,7 @@ def main():
             return
         App(Tk()).run()
     else:
-        Console().start()
+        Console().run()
 
 if __name__ == "__main__":
     main()
