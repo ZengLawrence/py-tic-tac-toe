@@ -43,8 +43,8 @@ def status_text(game):
 
 class App:
     """Class for GUI app"""
-    def __init__(self, master):
-        self.root = master
+    def __init__(self, root):
+        self.root = root
         self.root.title("Tic Tac Toe")
         _frm = ttk.Frame(self.root, padding=10)
         _frm.grid()
@@ -66,5 +66,5 @@ class App:
         self.root.update()
 
 if __name__ == "__main__":
-    root = Tk()
-    App(root).run()
+    _root = Tk()
+    App(_root).run()
