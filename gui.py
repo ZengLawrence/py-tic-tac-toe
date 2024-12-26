@@ -41,7 +41,7 @@ class App:
     """Class for GUI app"""
     def __init__(self, master):
         self.root = master
-        self.root.title("Tic Tac Too")
+        self.root.title("Tic Tac Toe")
         self.frm = ttk.Frame(self.root, padding=10)
         self.frm.grid()
         game = Game()
