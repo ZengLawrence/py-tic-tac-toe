@@ -20,10 +20,12 @@ def init_board(frame, game):
 
 def refresh_board(board, game):
     """Refresh board with game state"""
+    enable = game.result is None
     for (i, row) in enumerate(game.state):
         for (j, btn_text) in enumerate(row):
             btn = board[i][j]
             btn["text"] = btn_text
+            btn["state"] = "disabled" if not enable else "normal"
 
 def init_status(frame, game):
     """Initialize status label"""
