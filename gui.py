@@ -25,13 +25,17 @@ def refresh_board(board, state):
             btn = board[i][j]
             btn["text"] = btn_text
 
-def init_status(frame):
+def init_status(frame, game):
     """Initialize status label"""
-    return ttk.Label(frame, text="Click on a box")
+    return ttk.Label(frame, text=status_text(game))
 
 def refresh_status(status, game):
     """Refresh status with game result"""
-    status["text"] = game.result if game.result else "Click on a box"
+    status["text"] = status_text(game)
+
+def status_text(game):
+    """Return status text"""
+    return game.result if game.result else game.side + "'s turn. Click on a box"
 
 class App:
     """Class for GUI app"""
@@ -40,11 +44,11 @@ class App:
         self.root.title("Tic Tac Too")
         self.frm = ttk.Frame(self.root, padding=10)
         self.frm.grid()
-        self.status = init_status(self.frm)
+        game = Game()
+        self.status = init_status(self.frm, game)
         self.status.grid(sticky="w")
         self.board_frame = ttk.Frame(self.frm)
         self.board_frame.grid()
-        game = Game()
         self.board = init_board(self.board_frame, game)
         game.register(self.__refresh)
         ttk.Button(self.frm, text="Quit", command=self.root.destroy).grid()
