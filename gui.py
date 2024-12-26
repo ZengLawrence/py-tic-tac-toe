@@ -41,7 +41,7 @@ class App:
         self.frm = ttk.Frame(self.root, padding=10)
         self.frm.grid()
         self.status = init_status(self.frm)
-        self.status.grid()
+        self.status.grid(sticky="w")
         self.board_frame = ttk.Frame(self.frm)
         self.board_frame.grid()
         game = Game()
