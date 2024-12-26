@@ -26,6 +26,7 @@ def refresh_board(board, state):
             btn["text"] = btn_text
 
 class App:
+    """Class for GUI app"""
     def __init__(self, master):
         self.root = master
         self.root.title("Tic Tac Too")
@@ -40,6 +41,7 @@ class App:
         ttk.Button(self.frm, text="Quit", command=self.root.destroy).grid()
 
     def run(self):
+        """Run the app"""
         self.root.mainloop()
 
 if __name__ == "__main__":
