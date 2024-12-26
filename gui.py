@@ -52,14 +52,14 @@ class App:
         self.status = init_status(_frm, game)
         self.status.grid(sticky="w")
         self.board = init_board(_frm, game)
-        game.register(self.__refresh)
+        game.register(self.refresh)
         ttk.Button(_frm, text="Quit", command=self.root.destroy).grid()
 
     def run(self):
         """Run the app"""
         self.root.mainloop()
 
-    def __refresh(self, game):
+    def refresh(self, game):
         """Refresh the app"""
         refresh_status(self.status, game)
         refresh_board(self.board, game)
