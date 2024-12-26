@@ -49,9 +49,9 @@ class App:
         game = Game()
         self.status = init_status(_frm, game)
         self.status.grid(sticky="w")
-        self.board_frame = ttk.Frame(_frm)
-        self.board_frame.grid()
-        self.board = init_board(self.board_frame, game)
+        _board_frame = ttk.Frame(_frm)
+        _board_frame.grid()
+        self.board = init_board(_board_frame, game)
         game.register(self.__refresh)
         ttk.Button(_frm, text="Quit", command=self.root.destroy).grid()
 
