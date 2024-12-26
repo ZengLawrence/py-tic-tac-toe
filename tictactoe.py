@@ -4,6 +4,7 @@ import argparse
 from console import Console
 
 try:
+    from tkinter import Tk
     from gui import App
     GUI_AVAILABLE = True
 except ImportError:
@@ -21,7 +22,7 @@ def main():
         if not GUI_AVAILABLE:
             print("GUI is not available. Please ensure tkinter is installed.")
             return
-        App().run()
+        App(Tk()).run()
     else:
         Console().start()
 
