@@ -11,6 +11,7 @@ except ImportError:
 
 
 def main():
+    """Main function to start the game."""
     parser = argparse.ArgumentParser(description="Start the Tic Tac Toe game.")
     parser.add_argument('--gui', action='store_true', help="Run the game with a GUI")
     args = parser.parse_args()
