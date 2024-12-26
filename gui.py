@@ -18,9 +18,9 @@ def init_board(frame, game):
             for (j, btn_text) in enumerate(row)]
             for (i, row) in enumerate(game.state)]
 
-def refresh_board(board, state):
+def refresh_board(board, game):
     """Refresh board with game state"""
-    for (i, row) in enumerate(state):
+    for (i, row) in enumerate(game.state):
         for (j, btn_text) in enumerate(row):
             btn = board[i][j]
             btn["text"] = btn_text
@@ -60,7 +60,7 @@ class App:
     def __refresh(self, game):
         """Refresh the app"""
         refresh_status(self.status, game)
-        refresh_board(self.board, game.state)
+        refresh_board(self.board, game)
         self.root.update()
 
 if __name__ == "__main__":
