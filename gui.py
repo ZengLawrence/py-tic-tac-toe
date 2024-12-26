@@ -26,10 +26,10 @@ def refresh_board(board, state):
             btn["text"] = btn_text
 
 class App:
-    def __init__(self, root):
-        self.root = root
+    def __init__(self, master):
+        self.root = master
         self.root.title("Tic Tac Too")
-        self.frm = ttk.Frame(root, padding=10)
+        self.frm = ttk.Frame(self.root, padding=10)
         self.frm.grid()
         ttk.Label(self.frm, text="Click on a box").grid()
         self.board_frame = ttk.Frame(self.frm)
