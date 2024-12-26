@@ -2,7 +2,13 @@
 
 import argparse
 from console import Console
-from gui import App
+
+try:
+    from gui import App
+    GUI_AVAILABLE = True
+except ImportError:
+    GUI_AVAILABLE = False
+
 
 def main():
     parser = argparse.ArgumentParser(description="Start the Tic Tac Toe game.")
@@ -10,6 +16,9 @@ def main():
     args = parser.parse_args()
 
     if args.gui:
+        if not GUI_AVAILABLE:
+            print("GUI is not available. Please ensure tkinter is installed.")
+            return
         App().run()
     else:
         Console().start()
