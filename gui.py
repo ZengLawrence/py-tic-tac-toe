@@ -14,7 +14,9 @@ def init_button(frame, text, game, col, row):
 
 def init_board(frame, game):
     """Initialize board with game state"""
-    return [[init_button(frame, btn_text, game, row=i, col=j)
+    _board_frame = ttk.Frame(frame)
+    _board_frame.grid()
+    return [[init_button(_board_frame, btn_text, game, row=i, col=j)
             for (j, btn_text) in enumerate(row)]
             for (i, row) in enumerate(game.state)]
 
@@ -49,9 +51,7 @@ class App:
         game = Game()
         self.status = init_status(_frm, game)
         self.status.grid(sticky="w")
-        _board_frame = ttk.Frame(_frm)
-        _board_frame.grid()
-        self.board = init_board(_board_frame, game)
+        self.board = init_board(_frm, game)
         game.register(self.__refresh)
         ttk.Button(_frm, text="Quit", command=self.root.destroy).grid()
 
