@@ -84,4 +84,5 @@ def run():
     print(INSTRUCTION)
     while game.result is None:
         play(game, human_side)
+    print_board(game.state)
     print_result(game)
