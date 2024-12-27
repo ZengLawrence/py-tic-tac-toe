@@ -68,20 +68,18 @@ def enter_side():
         return side
     return enter_side()
 
-class Console:
-    """Class represent console based game. Used for user interactions."""
-    def run(self):
-        """Run console game"""
-        two_player_game = user_move
-        if enter_players() == 1:
-            human_side = enter_side()
-            def one_player_game(game):
-                """Game for one player"""
-                if game.side == human_side:
-                    return user_move(game)
-                return computer_move(game)
-            per_move = one_player_game
-        else:
-            per_move = two_player_game
-        print(INSTRUCTION)
-        Game().start(per_move, done = print_result)
+def run():
+    """Run console game"""
+    two_player_game = user_move
+    if enter_players() == 1:
+        human_side = enter_side()
+        def one_player_game(game):
+            """Game for one player"""
+            if game.side == human_side:
+                return user_move(game)
+            return computer_move(game)
+        per_move = one_player_game
+    else:
+        per_move = two_player_game
+    print(INSTRUCTION)
+    Game().start(per_move, done = print_result)

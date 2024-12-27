@@ -1,7 +1,7 @@
 """Main module to start the game."""
 
 import argparse
-from console import Console
+import console
 from gui import App
 
 def main():
@@ -14,7 +14,7 @@ def main():
     if args.gui:
         App().run()
     else:
-        Console().run()
+        console.run()
 
 if __name__ == "__main__":
     main()
