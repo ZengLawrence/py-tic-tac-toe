@@ -1,6 +1,5 @@
 """Module to start the console based game."""
 
-import random
 import sys
 from game import Game, BoxTakenViolation, RuleViolation
 
@@ -40,12 +39,6 @@ def user_move(game):
         print(f"Box {move[0]}{move[1]} is taken")
     except RuleViolation:
         print(INSTRUCTION)
-
-def computer_move(game):
-    """Computer enters a randomly selected move."""
-    move = random.choice(game.empty_boxes())
-    print(f"Computer takes {move[0]}{move[1]} for {game.side}.")
-    game.make(move)
 
 def print_result(game):
     """Print game result."""
