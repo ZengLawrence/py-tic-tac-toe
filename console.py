@@ -66,7 +66,7 @@ def play(game, human_side):
                 move, side, previous_state = game.previous_move
                 print_board(previous_state)
                 print(f"Computer takes {move[0]}{move[1]} for {side}.")
-                print_board(game.state)
+            print_board(game.state)
             user_move(game)
     else:
         print_board(game.state)
