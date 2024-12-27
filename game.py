@@ -73,16 +73,10 @@ class Game:
         """Return true if game is running. Game ends if there is a winner or a tie."""
         return self.result is None
 
-    def start(self, per_move, done):
-        """
-            Starts game. Execute per_move function repeatedly while the game is running, 
-            and done function when the game ends.
-
-            Both per_move and done function takes game instance as input.
-        """
-        while self.__running():
-            per_move(self)
-        done(self)
+    def start(self):
+        """Starts game by calling callback function"""
+        if self.callback:
+            self.callback(self)
 
     def register(self, callback):
         """Register callback function for state change event"""

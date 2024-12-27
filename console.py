@@ -40,15 +40,12 @@ def user_move(game):
         print(f"Box {move[0]}{move[1]} is taken")
     except RuleViolation:
         print(INSTRUCTION)
-    else:
-        print_board(game.state)
 
 def computer_move(game):
     """Computer enters a randomly selected move."""
     move = random.choice(game.empty_boxes())
     print(f"Computer takes {move[0]}{move[1]} for {game.side}.")
     game.make(move)
-    print_board(game.state)
 
 def print_result(game):
     """Print game result."""
@@ -82,4 +79,12 @@ def run():
     else:
         per_move = two_player_game
     print(INSTRUCTION)
-    Game().start(per_move, done = print_result)
+    def callback(game):
+        print_board(game.state)
+        if game.result:
+            print_result(game)
+        else:
+            per_move(game)
+    game = Game()
+    game.register(callback)
+    game.start()
