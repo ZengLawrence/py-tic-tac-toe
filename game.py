@@ -69,10 +69,6 @@ class Game:
         self.result = None
         self.callback = None
 
-    def __running(self):
-        """Return true if game is running. Game ends if there is a winner or a tie."""
-        return self.result is None
-
     def start(self):
         """Starts game by calling callback function"""
         if self.callback:
