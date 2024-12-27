@@ -77,6 +77,7 @@ class Game:
         self.result = None
         self.callback = None
         self.players = ['x', 'o']
+        self.previous_move = None
 
     def start(self, players=None):
         """Starts game by calling callback function"""
@@ -105,6 +106,7 @@ class Game:
         if tie(self.state):
             self.result = "tie"
         self.side = next_side(self.side)
+        self.previous_move = (move, self.side)
         if self.callback:
             self.callback(self)
         if self.result is None and self.side not in self.players:

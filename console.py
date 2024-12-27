@@ -67,12 +67,16 @@ def enter_side():
 
 def play(game, human_side):
     """Play the game"""
-    print_board(game.state)
     if human_side:
         if game.side == human_side:
+            if game.previous_move:
+                move, side = game.previous_move
+                print(f"Computer takes {move[0]}{move[1]} for {side}.")
+                print_board(game.state)
             user_move(game)
     else:
         user_move(game)
+    print_board(game.state)
 
 def run():
     """Run console game"""
