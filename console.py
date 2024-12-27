@@ -63,17 +63,19 @@ def play(game, human_side):
     if human_side:
         if game.side == human_side:
             if game.previous_move:
-                move, side = game.previous_move
+                move, side, previous_state = game.previous_move
+                print_board(previous_state)
                 print(f"Computer takes {move[0]}{move[1]} for {side}.")
                 print_board(game.state)
             user_move(game)
     else:
+        print_board(game.state)
         user_move(game)
-    print_board(game.state)
 
 def run():
     """Run console game"""
     players = None
+    human_side = None
     if enter_players() == 1:
         human_side = enter_side()
         players = [human_side]

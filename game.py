@@ -1,6 +1,7 @@
 """ Module implements game rules"""
 
 import random
+import copy
 
 
 def init_state():
@@ -100,13 +101,15 @@ class Game:
             if not valid.
         """
         validate(move, self.state)
+        previous_state = copy.deepcopy(self.state)
+        previous_side = self.side
         set_side(self.state, move, self.side)
         if winner(self.state):
             self.result = self.side + " won"
         if tie(self.state):
             self.result = "tie"
         self.side = next_side(self.side)
-        self.previous_move = (move, self.side)
+        self.previous_move = (move, previous_side, previous_state)
         if self.callback:
             self.callback(self)
         if self.result is None and self.side not in self.players:
