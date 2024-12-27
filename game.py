@@ -64,10 +64,10 @@ def tie(state):
     """Return true if game ends in a tie"""
     return all(val in 'xo' for row in state for val in row)
 
-def computer_move(game):
+def computer_move(current_game):
     """Computer enters a randomly selected move."""
-    move = random.choice(empty_boxes(game.state))
-    game.make(move)
+    move = random.choice(empty_boxes(current_game.state))
+    current_game.make(move)
 
 def empty_boxes(state):
     """Return all empty boxes on the board."""
