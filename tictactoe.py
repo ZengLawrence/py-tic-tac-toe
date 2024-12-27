@@ -2,14 +2,7 @@
 
 import argparse
 from console import Console
-
-try:
-    from tkinter import Tk
-    from gui import App
-    GUI_AVAILABLE = True
-except ImportError:
-    GUI_AVAILABLE = False
-
+from gui import App
 
 def main():
     """Main function to start the game."""
@@ -19,10 +12,7 @@ def main():
     args = parser.parse_args()
 
     if args.gui:
-        if not GUI_AVAILABLE:
-            print("GUI is not available. Please ensure tkinter is installed.")
-            return
-        App(Tk()).run()
+        App().run()
     else:
         Console().run()
 
