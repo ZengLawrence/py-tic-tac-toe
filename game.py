@@ -66,8 +66,14 @@ def tie(state):
 
 def computer_move(game):
     """Computer enters a randomly selected move."""
-    move = random.choice(game.empty_boxes())
+    move = random.choice(empty_boxes(game.state))
     game.make(move)
+
+def empty_boxes(state):
+    """Return all empty boxes on the board."""
+    return [(i+1, j+1) for (i, row) in enumerate(state)
+                        for (j, v) in enumerate(row)
+                        if v == " "]
 
 class Game:
     """Class representing game"""
@@ -115,12 +121,6 @@ class Game:
         if self.result is None and self.side not in self.players:
             computer_move(self)
 
-    def empty_boxes(self):
-        """Return all empty boxes on the board."""
-        return [(i+1, j+1) for (i, row) in enumerate(self.state)
-                           for (j, v) in enumerate(row)
-                           if v == " "]
-
 if __name__ == "__main__":
     assert winner([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
     assert winner([[' ', ' ', ' '], ['x', 'x', 'x'], [' ', ' ', ' ']]), "second row is winner"
@@ -136,4 +136,4 @@ if __name__ == "__main__":
     assert not (winner(running_game) or tie(running_game)), "game is still running"
 
     game = Game()
-    assert Game.empty_boxes(game) == [(1,1), (1,2), (1,3), (2,1), (2,2), (2,3), (3,1), (3,2), (3,3)]
+    assert empty_boxes(game.state) == [(1,1), (1,2), (1,3), (2,1), (2,2), (2,3), (3,1), (3,2), (3,3)]
