@@ -68,14 +68,11 @@ def enter_side():
 def play(game, human_side):
     """Play the game"""
     print_board(game.state)
-    if game.result:
-        print_result(game)
-    else:
-        if human_side:
-            if game.side == human_side:
-                user_move(game)
-        else:
+    if human_side:
+        if game.side == human_side:
             user_move(game)
+    else:
+        user_move(game)
 
 def run():
     """Run console game"""
@@ -83,9 +80,9 @@ def run():
     if enter_players() == 1:
         human_side = enter_side()
         players = [human_side]
-    print(INSTRUCTION)
-    def callback(game):
-        play(game, human_side)
     game = Game()
-    game.register(callback)
     game.start(players)
+    print(INSTRUCTION)
+    while game.result is None:
+        play(game, human_side)
+    print_result(game)
