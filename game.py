@@ -136,4 +136,7 @@ if __name__ == "__main__":
     assert not (winner(running_game) or tie(running_game)), "game is still running"
 
     game = Game()
-    assert empty_boxes(game.state) == [(1,1), (1,2), (1,3), (2,1), (2,2), (2,3), (3,1), (3,2), (3,3)]
+    assert empty_boxes(game.state) == [
+        (1,1), (1,2), (1,3),
+        (2,1), (2,2), (2,3),
+        (3,1), (3,2), (3,3)]
