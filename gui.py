@@ -70,4 +70,4 @@ class App:
         self.root.update()
 
 if __name__ == "__main__":
-    App(Tk()).run()
+    App().run()
