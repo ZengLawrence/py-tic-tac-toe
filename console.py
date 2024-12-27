@@ -67,24 +67,21 @@ def enter_side():
 
 def run():
     """Run console game"""
-    two_player_game = user_move
+    players = None
     if enter_players() == 1:
         human_side = enter_side()
-        def one_player_game(game):
-            """Game for one player"""
-            if game.side == human_side:
-                return user_move(game)
-            return computer_move(game)
-        per_move = one_player_game
-    else:
-        per_move = two_player_game
+        players = [human_side]
     print(INSTRUCTION)
     def callback(game):
         print_board(game.state)
         if game.result:
             print_result(game)
         else:
-            per_move(game)
+            if human_side:
+                if game.side == human_side:
+                    user_move(game)
+            else:
+                user_move(game)
     game = Game()
     game.register(callback)
-    game.start()
+    game.start(players)

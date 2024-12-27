@@ -1,5 +1,8 @@
 """ Module implements game rules"""
 
+import random
+
+
 def init_state():
     """ Initialize state"""
     return [[" ", " ", " "],
@@ -60,6 +63,11 @@ def tie(state):
     """Return true if game ends in a tie"""
     return all(val in 'xo' for row in state for val in row)
 
+def computer_move(game):
+    """Computer enters a randomly selected move."""
+    move = random.choice(game.empty_boxes())
+    game.make(move)
+
 class Game:
     """Class representing game"""
 
@@ -68,11 +76,17 @@ class Game:
         self.side = 'x'
         self.result = None
         self.callback = None
+        self.players = ['x', 'o']
 
-    def start(self):
+    def start(self, players=None):
         """Starts game by calling callback function"""
-        if self.callback:
-            self.callback(self)
+        if players:
+            self.players = players
+        if 'x' in self.players:
+            if self.callback:
+                self.callback(self)
+        else:
+            computer_move(self)
 
     def register(self, callback):
         """Register callback function for state change event"""
@@ -93,6 +107,8 @@ class Game:
         self.side = next_side(self.side)
         if self.callback:
             self.callback(self)
+        if self.result is None and self.side not in self.players:
+            computer_move(self)
 
     def empty_boxes(self):
         """Return all empty boxes on the board."""
