@@ -31,18 +31,18 @@ class PlayerDialog:
         self.result = 2
         self.top.destroy()
 
-def show_player_dialog(root):
+def show_player_dialog(parent):
     """
     Show the player dialog and return the result.
 
     Args:
-        root (tk.Tk): The parent window.
+        parent (tk.Tk): The parent window.
 
     Returns:
         int: The number of players selected (1 or 2).
     """
-    dialog = PlayerDialog(root)
-    root.wait_window(dialog.top)
+    dialog = PlayerDialog(parent)
+    parent.wait_window(dialog.top)
     return dialog.result
 
 class SideDialog:
@@ -74,18 +74,18 @@ class SideDialog:
         self.result = 'o'
         self.top.destroy()
 
-def show_side_dialog(root):
+def show_side_dialog(parent):
     """
     Show the side dialog and return the result.
 
     Args:
-        root (tk.Tk): The parent window.
+        parent (tk.Tk): The parent window.
 
     Returns:
         str: The side selected ('x' or 'o').
     """
-    dialog = SideDialog(root)
-    root.wait_window(dialog.top)
+    dialog = SideDialog(parent)
+    parent.wait_window(dialog.top)
     return dialog.result
 
 if __name__ == "__main__":
