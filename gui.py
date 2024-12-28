@@ -3,6 +3,7 @@
 from tkinter import Tk
 from tkinter import ttk
 from game import Game
+from dialog import show_player_dialog, show_side_dialog
 
 def init_button(frame, text, game, col, row):
     """Initialize button in board"""
@@ -49,6 +50,7 @@ class App:
         game = Game()
         self.__layout(game)
         game.register(self.refresh)
+        self.game = game
 
     def __layout(self, game):
         _frm = ttk.Frame(self.root, padding=10)
@@ -61,6 +63,12 @@ class App:
 
     def run(self):
         """Run the app"""
+        if show_player_dialog(self.root) == 1:
+            side = show_side_dialog(self.root)
+            players = [side] if side else None
+            self.game.start(players)
+        else:
+            self.game.start()
         self.root.mainloop()
 
     def refresh(self, game):
