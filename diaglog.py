@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 
 class PlayerDialog:
     def __init__(self, parent):
