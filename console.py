@@ -1,6 +1,5 @@
 """Module to start the console based game."""
 
-import random
 import sys
 from game import Game, BoxTakenViolation, RuleViolation
 
@@ -40,15 +39,6 @@ def user_move(game):
         print(f"Box {move[0]}{move[1]} is taken")
     except RuleViolation:
         print(INSTRUCTION)
-    else:
-        print_board(game.state)
-
-def computer_move(game):
-    """Computer enters a randomly selected move."""
-    move = random.choice(game.empty_boxes())
-    print(f"Computer takes {move[0]}{move[1]} for {game.side}.")
-    game.make(move)
-    print_board(game.state)
 
 def print_result(game):
     """Print game result."""
@@ -68,20 +58,31 @@ def enter_side():
         return side
     return enter_side()
 
-class Console:
-    """Class represent console based game. Used for user interactions."""
-    def run(self):
-        """Run console game"""
-        two_player_game = user_move
-        if enter_players() == 1:
-            human_side = enter_side()
-            def one_player_game(game):
-                """Game for one player"""
-                if game.side == human_side:
-                    return user_move(game)
-                return computer_move(game)
-            per_move = one_player_game
-        else:
-            per_move = two_player_game
-        print(INSTRUCTION)
-        Game().start(per_move, done = print_result)
+def play(game, human_side):
+    """Play the game"""
+    if human_side:
+        if game.side == human_side:
+            if game.previous_move:
+                move, side, previous_state = game.previous_move
+                print_board(previous_state)
+                print(f"Computer takes {move[0]}{move[1]} for {side}.")
+            print_board(game.state)
+            user_move(game)
+    else:
+        print_board(game.state)
+        user_move(game)
+
+def run():
+    """Run console game"""
+    players = None
+    human_side = None
+    if enter_players() == 1:
+        human_side = enter_side()
+        players = [human_side]
+    game = Game()
+    game.start(players)
+    print(INSTRUCTION)
+    while game.result is None:
+        play(game, human_side)
+    print_board(game.state)
+    print_result(game)

@@ -1,5 +1,9 @@
 """ Module implements game rules"""
 
+import random
+import copy
+
+
 def init_state():
     """ Initialize state"""
     return [[" ", " ", " "],
@@ -60,6 +64,17 @@ def tie(state):
     """Return true if game ends in a tie"""
     return all(val in 'xo' for row in state for val in row)
 
+def computer_move(current_game):
+    """Computer enters a randomly selected move."""
+    move = random.choice(empty_boxes(current_game.state))
+    current_game.make(move)
+
+def empty_boxes(state):
+    """Return all empty boxes on the board."""
+    return [(i+1, j+1) for (i, row) in enumerate(state)
+                        for (j, v) in enumerate(row)
+                        if v == " "]
+
 class Game:
     """Class representing game"""
 
@@ -68,21 +83,18 @@ class Game:
         self.side = 'x'
         self.result = None
         self.callback = None
+        self.players = ['x', 'o']
+        self.previous_move = None
 
-    def __running(self):
-        """Return true if game is running. Game ends if there is a winner or a tie."""
-        return self.result is None
-
-    def start(self, per_move, done):
-        """
-            Starts game. Execute per_move function repeatedly while the game is running, 
-            and done function when the game ends.
-
-            Both per_move and done function takes game instance as input.
-        """
-        while self.__running():
-            per_move(self)
-        done(self)
+    def start(self, players=None):
+        """Starts game by calling callback function"""
+        if players:
+            self.players = players
+        if 'x' in self.players:
+            if self.callback:
+                self.callback(self)
+        else:
+            computer_move(self)
 
     def register(self, callback):
         """Register callback function for state change event"""
@@ -95,20 +107,19 @@ class Game:
             if not valid.
         """
         validate(move, self.state)
+        previous_state = copy.deepcopy(self.state)
+        previous_side = self.side
         set_side(self.state, move, self.side)
         if winner(self.state):
             self.result = self.side + " won"
         if tie(self.state):
             self.result = "tie"
         self.side = next_side(self.side)
+        self.previous_move = (move, previous_side, previous_state)
         if self.callback:
             self.callback(self)
-
-    def empty_boxes(self):
-        """Return all empty boxes on the board."""
-        return [(i+1, j+1) for (i, row) in enumerate(self.state)
-                           for (j, v) in enumerate(row)
-                           if v == " "]
+        if self.result is None and self.side not in self.players:
+            computer_move(self)
 
 if __name__ == "__main__":
     assert winner([['x', 'x', 'x'], [' ', ' ', ' '], [' ', ' ', ' ']]), "first row is winner"
@@ -125,4 +136,7 @@ if __name__ == "__main__":
     assert not (winner(running_game) or tie(running_game)), "game is still running"
 
     game = Game()
-    assert Game.empty_boxes(game) == [(1,1), (1,2), (1,3), (2,1), (2,2), (2,3), (3,1), (3,2), (3,3)]
+    assert empty_boxes(game.state) == [
+        (1,1), (1,2), (1,3),
+        (2,1), (2,2), (2,3),
+        (3,1), (3,2), (3,3)]
