@@ -3,7 +3,7 @@
 from tkinter import Tk
 from tkinter import ttk
 from game import Game
-from diaglog import show_player_dialog, show_side_dialog
+from dialog import show_player_dialog, show_side_dialog
 
 def init_button(frame, text, game, col, row):
     """Initialize button in board"""
